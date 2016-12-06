@@ -1,0 +1,55 @@
+- I added the class "Tools" from FF cauz I needed it
+- I assume several cars can stand on the same grid (as one grid is like 50m x 50m and it would fuck up otherwise)
+- I added getDistanceTo() in Tools
+- Btw, please check that the use of hashmap in that function is good, it might be screwing up
+
+- Something to check: I put a knowledge as argument of the function "findOptimalParking" in GuidedDriver, it probably
+	will have to be changed. The only point is that the program needs to have the list of all parkings (Q-park).
+	If ther is some other way we can change it.
+
+- !! ATTENTION !! I added getGrid() in ParkingAgent
+
+- !! ATTENTION !! I assume that duration of stay is in minutes
+
+- !! ATTENTION !! I assume that price for the parking is in minutes
+
+
+- Utility(park in parking A) = - (gridToWalkToDest ^ 2)/10 - overall price to pay(in cents) / 3
+
+	The square on the walking distance is to have an exponentional function and we divide it by ten for now so that the price has more impact on the driver's choice of parking (can be changed later)
+	Note that if the guy is of type lazy, we multiply the first term by 1.5
+	If the guy is of type cheap, we multiply the second term by 1.5
+	The utility can only be negative but it doesn't change much to the interpretation
+
+- TODO : Really check if all prices and durations are per minute, its never the same when I read the files
+
+- Parameters to check for the driver: arrivalPlace (should be set in the current grid), arrival time, duration should be in minutes				       
+
+- I assumed the price is an int (it's cents, pointless to consider double), so I round it in the formula
+
+- I estimate that a car "speed" should be 3 grids per minutes 
+
+- In the findOptimalParking() fct, we should add the condition that the parking is not full
+
+- When a driver arrives in a parking, ensure that the "checkin()" function do work ON THE GOOD PARKING, as it is called on optimalParking
+	(might be that we should call it on the array of all the parkings or so)
+
+- What is the guided driver's strategy if the parking to which he arrives is full ?
+
+- I assume that drivers can know if a parking is full through the "app", without going there (it is more convenient that way)
+
+- I didn't used the "MaxPricePerHours" parameter of drivers for now, I'm not sure it makes sense at all (there's already a negative impact on the utility)
+
+- Don't forget to add 
+
+	public int getPosX() {
+		return this.grid.getLocation(this).getX();
+	}
+	
+	public int getPosY() {
+		return this.grid.getLocation(this).getY();
+	}
+
+In the ParkingAgent file
+
+- For guided drivers: We could add a parameter "time to be at destination", and if they take too much time to find a parking, they just stop and take a city parking

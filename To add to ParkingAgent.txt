@@ -1,0 +1,11 @@
+public grid getGrid() {
+		return grid;
+	}
+	
+public int getPosX() {
+	return this.grid.getLocation(this).getX();
+	}
+	
+public int getPosY() {
+	return this.grid.getLocation(this).getY();
+	}	
